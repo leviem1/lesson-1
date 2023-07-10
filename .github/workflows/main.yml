@@ -1,4 +1,4 @@
-name: Lint, Test, Archive, and Deploy
+name: Test
 
 on:
   push:
