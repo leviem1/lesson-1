@@ -1,0 +1,29 @@
+name: Lint, Test, Archive, and Deploy
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.11
+      volumes:
+        - ${{ github.workspace }}:/usr/src/app
+      options: -w /usr/src/app
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Run tests
+        run: |
+          pip install tox
+          tox -e py3
